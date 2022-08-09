@@ -12,10 +12,11 @@ function App() {
   return (
     <ThemeProvider theme={darkMode ? DarkTheme : LightTheme}>
       <Container>
-        
-          <Menu setDarkMode={setDarkMode} darkMode={darkMode} />
+        <Menu setDarkMode={setDarkMode} darkMode={darkMode} />
+        <Main>
           <Navbar />
-        
+          <h1>Video Cards</h1>
+        </Main>
       </Container>
     </ThemeProvider>
   );
@@ -25,6 +26,9 @@ export default App;
 
 const Container = styled.div`
   display: flex;
-  
 `;
 
+const Main = styled.div`
+  flex: 11;
+  background-color: ${({theme}) => theme.mainBg};
+`;
