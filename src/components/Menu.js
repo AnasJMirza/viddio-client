@@ -18,7 +18,7 @@ import LiveTvOutlinedIcon from "@mui/icons-material/LiveTvOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 import HelpCenterOutlinedIcon from "@mui/icons-material/HelpCenterOutlined";
-import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
+import SettingsBrightnessOutlinedIcon from '@mui/icons-material/SettingsBrightnessOutlined';
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 
 const Menu = (props) => {
@@ -102,7 +102,7 @@ const Menu = (props) => {
             props.setDarkMode(!props.darkMode)
           }
         >
-          <LightModeOutlinedIcon />
+          <SettingsBrightnessOutlinedIcon />
           {props.darkMode ? 'Light Mode' : 'Dark Mode'}
         </Item>
       </Wrapper>
@@ -113,7 +113,7 @@ const Menu = (props) => {
 export default Menu;
 
 const Container = styled.div`
-  background-color: ${({ theme }) => theme.mainBg};
+  background-color: ${({ theme }) => theme.menuBg};
   flex: 2;
   color: ${({ theme }) => theme.text};
   height: 100vh;
