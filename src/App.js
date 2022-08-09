@@ -5,6 +5,7 @@ import Menu from "./components/Menu";
 import Navbar from "./components/Navbar";
 import { DarkTheme, LightTheme } from "./utils/Themes";
 import { useState } from "react";
+import Routes from "./routes/Routes";
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -15,7 +16,7 @@ function App() {
         <Menu setDarkMode={setDarkMode} darkMode={darkMode} />
         <Main>
           <Navbar />
-          <h1>Video Cards</h1>
+          <Routes />
         </Main>
       </Container>
     </ThemeProvider>

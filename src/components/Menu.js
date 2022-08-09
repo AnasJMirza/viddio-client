@@ -132,6 +132,7 @@ const Logo = styled.div`
   gap: 6px;
   font-weight: bold;
   margin-bottom: 8px;
+  font-size: 16px;
 `;
 
 const Img = styled.img`
