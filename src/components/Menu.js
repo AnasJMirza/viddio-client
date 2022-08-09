@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from 'react-router-dom';
 import youtube from "../assets/images/youtube.png";
 
 // icons imports
@@ -18,17 +19,19 @@ import LiveTvOutlinedIcon from "@mui/icons-material/LiveTvOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 import HelpCenterOutlinedIcon from "@mui/icons-material/HelpCenterOutlined";
-import SettingsBrightnessOutlinedIcon from '@mui/icons-material/SettingsBrightnessOutlined';
+import SettingsBrightnessOutlinedIcon from "@mui/icons-material/SettingsBrightnessOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 
 const Menu = (props) => {
   return (
     <Container>
       <Wrapper>
-        <Logo>
-          <Img src={youtube} />
-          YouTube
-        </Logo>
+        <Link to="/" style={{textDecoration: 'none', color: 'inherit'}}>
+          <Logo>
+            <Img src={youtube} />
+            YouTube
+          </Logo>
+        </Link>
 
         <Item>
           <HomeIcon />
@@ -97,13 +100,9 @@ const Menu = (props) => {
           <HelpCenterOutlinedIcon />
           Help
         </Item>
-        <Item
-          onClick={() =>
-            props.setDarkMode(!props.darkMode)
-          }
-        >
+        <Item onClick={() => props.setDarkMode(!props.darkMode)}>
           <SettingsBrightnessOutlinedIcon />
-          {props.darkMode ? 'Light Mode' : 'Dark Mode'}
+          {props.darkMode ? "Light Mode" : "Dark Mode"}
         </Item>
       </Wrapper>
     </Container>
@@ -133,6 +132,8 @@ const Logo = styled.div`
   font-weight: bold;
   margin-bottom: 8px;
   font-size: 16px;
+  cursor: pointer;
+
 `;
 
 const Img = styled.img`

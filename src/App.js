@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import { DarkTheme, LightTheme } from "./utils/Themes";
 import { useState } from "react";
 import Routes from "./routes/Routes";
+import { BrowserRouter } from 'react-router-dom'
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -13,11 +14,13 @@ function App() {
   return (
     <ThemeProvider theme={darkMode ? DarkTheme : LightTheme}>
       <Container>
+       <BrowserRouter>
         <Menu setDarkMode={setDarkMode} darkMode={darkMode} />
         <Main>
           <Navbar />
           <Routes />
         </Main>
+        </BrowserRouter>
       </Container>
     </ThemeProvider>
   );
