@@ -2,17 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from 'react-router-dom'
 
-const Card = () => {
+const Card = (props) => {
   return (
     <Link to="/video/test" style={{textDecoration: 'none'}}>
-      <Container>
-        <Image src="https://i.ytimg.com/vi/xyVfLxV08I0/maxresdefault.jpg" />
-        <Details>
-          <ChannelImage src="https://avatars.githubusercontent.com/u/90819686?v=4" />
+      <Container type={props.type} >
+        <Image type={props.type} src="https://i.ytimg.com/vi/xyVfLxV08I0/maxresdefault.jpg" />
+        <Details type={props.type}>
+          <ChannelImage type={props.type} src="https://avatars.githubusercontent.com/u/90819686?v=4" />
           <Text>
-            <Title>Learn Python in 5 Minutes</Title>
-            <ChannelName>AnasJMirza</ChannelName>
-            <Info>100,000 views ● 1 day ago</Info>
+            <Title type={props.type}>Learn Python in 5 Minutes</Title>
+            <ChannelName type={props.type}>AnasJMirza</ChannelName>
+            <Info type={props.type} >100,000 views ● 1 day ago</Info>
           </Text>
         </Details>
       </Container>
@@ -23,23 +23,27 @@ const Card = () => {
 export default Card;
 
 const Container = styled.div`
-  width: 325px;
-  margin-bottom: 45px;
+  width: ${(props) => props.type !== 'small' && '320px'};
+  margin-bottom: ${(props) => props.type !== 'small' ? '45px' : '10px'};
   cursor: pointer;
-  /* margin: 5px 10px; */
+  display: ${(props) => props.type === 'small' && 'flex'};
+  gap: ${(props) => props.type === 'small' && '10px'};
 `;
 
 const Image = styled.img`
   width: 100%;
-  height: 190px;
+  height: ${(props) => props.type === 'small' && '100px'};
   background-color: #999;
+  flex:1;
+  
 `;
 
 const Details = styled.div`
   display: flex;
   align-items: flex-start;
-  margin-top: 16px;
+  margin-top: ${(props) => props.type !== 'small' && '16px'};
   gap: 12px;
+  flex: 1;
 `;
 
 const ChannelImage = styled.img`
@@ -48,20 +52,22 @@ const ChannelImage = styled.img`
   border-radius: 50%;
   background-repeat: 50%;
   background-color: #999;
+  display: ${(props) => props.type === 'small' && 'none'};
+  
 `;
 
 const Text = styled.div``;
 const Title = styled.h1`
-  font-size: 16px;
+  font-size: ${(props) => props.type === 'small' ? '14px' : '16px'};
   font-weight: 500;
   color: ${({ theme }) => theme.text};
 `;
 const ChannelName = styled.h2`
-  font-size: 14px;
+  font-size: ${(props) => props.type === 'small' && '12px'};
   margin: 5px 0px;
   color: ${({ theme }) => theme.textSoft};
 `;
 const Info = styled.p`
-  font-size: 14px;
+  font-size: ${(props) => props.type === 'small' && '10px'};
   color: ${({ theme }) => theme.textSoft};
 `;

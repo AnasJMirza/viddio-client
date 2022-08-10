@@ -6,7 +6,8 @@ import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
 import ReplyOutlinedIcon from "@mui/icons-material/ReplyOutlined";
 import AddTaskOutlinedIcon from "@mui/icons-material/AddTaskOutlined";
-import AddCommnet from "../components/AddCommnet";
+import Comments from "../components/Comments";
+import Card from "../components/Card";
 
 const Video = () => {
   return (
@@ -55,9 +56,29 @@ const Video = () => {
           <Subscribe>Subscribe</Subscribe>
         </Channel>
         <Hr />
-        <AddCommnet />
+        <Comments />
       </Content>
-      <Recommendation>Recommend</Recommendation>
+      <Recommendation>
+        <Card type="small" />
+        <Card type="small" />
+        <Card type="small" />
+        <Card type="small" />
+        <Card type="small" />
+        <Card type="small" />
+        <Card type="small" />
+        <Card type="small" />
+        <Card type="small" />
+        <Card type="small" />
+        <Card type="small" />
+        <Card type="small" />
+        <Card type="small" />
+        <Card type="small" />
+        <Card type="small" />
+        <Card type="small" />
+        <Card type="small" />
+        <Card type="small" />
+        <Card type="small" />
+      </Recommendation>
     </Container>
   );
 };
@@ -67,7 +88,7 @@ export default Video;
 const Container = styled.div`
   display: flex;
   gap: 20px;
-  margin: 22px 56px;
+  margin: 22px 26px;
 `;
 const Content = styled.div`
   flex: 5;
@@ -135,7 +156,7 @@ const ChannelInfo = styled.div`
 const ChannelName = styled.h1`
     margin-bottom: 4px;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     color: ${({theme}) => theme.text};
 
 `;
