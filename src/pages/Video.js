@@ -91,7 +91,7 @@ const Container = styled.div`
   margin: 22px 26px;
 `;
 const Content = styled.div`
-  flex: 5;
+  flex: 4.5;
 `;
 const Recommendation = styled.div`
   flex: 2;
