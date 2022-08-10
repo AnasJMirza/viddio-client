@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import youtube from "../assets/images/youtube.png";
 
 // icons imports
@@ -26,7 +26,7 @@ const Menu = (props) => {
   return (
     <Container>
       <Wrapper>
-        <Link to="/" style={{textDecoration: 'none', color: 'inherit'}}>
+        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
           <Logo>
             <Img src={youtube} />
             YouTube
@@ -57,10 +57,12 @@ const Menu = (props) => {
         <Hr />
         <Login>
           Sign in to like videos, comment and subscribe
-          <Button>
-            <AccountCircleOutlinedIcon />
-            SIGN IN
-          </Button>
+          <Link to="signin" style={{ textDecoration: "none" }}>
+            <Button>
+              <AccountCircleOutlinedIcon />
+              SIGN IN
+            </Button>
+          </Link>
         </Login>
         <Hr />
         <Item>
@@ -133,7 +135,6 @@ const Logo = styled.div`
   margin-bottom: 8px;
   font-size: 16px;
   cursor: pointer;
-
 `;
 
 const Img = styled.img`
@@ -146,6 +147,10 @@ const Item = styled.div`
   gap: 15px;
   padding: 5px 0px;
   cursor: pointer;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.soft};
+  }
 `;
 
 const Hr = styled.hr`
