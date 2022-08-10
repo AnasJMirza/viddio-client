@@ -6,6 +6,7 @@ import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
 import ReplyOutlinedIcon from "@mui/icons-material/ReplyOutlined";
 import AddTaskOutlinedIcon from "@mui/icons-material/AddTaskOutlined";
+import AddCommnet from "../components/AddCommnet";
 
 const Video = () => {
   return (
@@ -53,6 +54,8 @@ const Video = () => {
           </ChannelDetails>
           <Subscribe>Subscribe</Subscribe>
         </Channel>
+        <Hr />
+        <AddCommnet />
       </Content>
       <Recommendation>Recommend</Recommendation>
     </Container>
@@ -144,7 +147,7 @@ const SubscribeCount = styled.p`
 
 const VideoDescription = styled.p`
     color: ${({theme}) => theme.text};
-    font-size: 11px;
+    font-size: 12px;
     margin-top: 8px;
     font-weight: 400;
 

@@ -53,7 +53,7 @@ const ChannelImage = styled.img`
 const Text = styled.div``;
 const Title = styled.h1`
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 500;
   color: ${({ theme }) => theme.text};
 `;
 const ChannelName = styled.h2`

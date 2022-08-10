@@ -24,39 +24,45 @@ const Navbar = () => {
 export default Navbar;
 
 const Container = styled.div`
-    position: sticky;
-    top: 0;
-    background-color: ${({theme}) => theme.menuBg};
-    height: 56px;
+  position: sticky;
+  top: 0;
+  background-color: ${({ theme }) => theme.menuBg};
+  height: 56px;
 `;
 
 const Wrapper = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    height: 100%;
-    padding: 0px 20px;
-    position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  padding: 0px 20px;
+  position: relative;
 `;
 
 const Search = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: auto;
-    width: 40%;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 40%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
 `;
 
 const Input = styled.input`
-    border: none;
-    background-color: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  background-color: transparent;
+  :focus {
+    color: ${({theme}) => theme.text};
+    opacity: 1; 
+  }
 `;
 
 const Button = styled.button`
