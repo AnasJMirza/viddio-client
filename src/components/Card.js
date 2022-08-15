@@ -35,6 +35,7 @@ const Image = styled.img`
   height: ${(props) => props.type === 'small' && '100px'};
   background-color: #999;
   flex:1;
+  background-color: gray;
   
 `;
 

@@ -9,6 +9,8 @@ import Routes from "./routes/Routes";
 import { BrowserRouter } from 'react-router-dom'
 
 function App() {
+
+  
   const [darkMode, setDarkMode] = useState(true);
 
   return (
@@ -36,3 +38,6 @@ const Main = styled.div`
   flex: 11;
   background-color: ${({theme}) => theme.mainBg};
 `;
+
+
+
