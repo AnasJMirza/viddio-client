@@ -6,7 +6,7 @@ const Card = (props) => {
   return (
     <Link to="/video/test" style={{textDecoration: 'none'}}>
       <Container type={props.type} >
-        <Image type={props.type} src="https://i.ytimg.com/vi/xyVfLxV08I0/maxresdefault.jpg" />
+        <Image type={props.type} src="https://img.freepik.com/premium-vector/comic-youtube-thumbnail-background-comic-style_530597-997.jpg?w=2000" />
         <Details type={props.type}>
           <ChannelImage type={props.type} src="https://avatars.githubusercontent.com/u/90819686?v=4" />
           <Text>
