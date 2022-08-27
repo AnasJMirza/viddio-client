@@ -1,4 +1,5 @@
 import React from "react";
+import { format } from 'timeago.js'
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -15,9 +16,9 @@ const Card = (props) => {
             src="https://avatars.githubusercontent.com/u/90819686?v=4"
           />
           <Text>
-            <Title type={props.type}>Learn Python in 5 Minutes</Title>
+            <Title type={props.type}>{props.video.title}</Title>
             <ChannelName type={props.type}>AnasJMirza</ChannelName>
-            <Info type={props.type}>100,000 views ● 1 day ago</Info>
+            <Info type={props.type}>{props.video.views} views ● {format(props.video.createdAt)}</Info>
           </Text>
         </Details>
       </Container>
