@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 import Card from '../components/Card';
+import axios from '../axios.js'
 
 
-const Home = () => {
+const Home = ({type}) => {
 
     const [videos, setVideos] = useState([]);
 
     useEffect(()=>{
         const getVideos = async () => {
-            const res = await axios.get('http://localhost:5000/api/video/random');
-            console.log('res', res.data);
+            const res = await axios.get(`/video/${type}`);
             setVideos(res.data);
         }
         getVideos();
-    }, [])
+    }, [type])
 
     return (
         <Container>

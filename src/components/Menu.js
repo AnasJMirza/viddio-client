@@ -37,14 +37,18 @@ const Menu = (props) => {
           <HomeIcon />
           Home
         </Item>
+        <Link to="trending" style={{ textDecoration: "none", color: "inherit" }}>
         <Item>
           <ExploreOutlinedIcon />
           Explore
         </Item>
+        </Link>
+        <Link to="subscription" style={{ textDecoration: "none", color: "inherit" }}>
         <Item>
           <SubscriptionsOutlinedIcon />
           Subscription
         </Item>
+        </Link>
         <Hr />
         <Item>
           <VideoLibraryOutlinedIcon />
