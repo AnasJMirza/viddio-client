@@ -1,15 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import axios from "../axios.js";
 
 const SignIn = () => {
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const res = await axios.post("/auth/signin", { name, password });
+      console.log("res", res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Container>
       <Wrapper>
         <Title>Sign In</Title>
         <SubTitle>To continue to Youtube</SubTitle>
-        <Input type="text" placeholder="Username" />
-        <Input type="password" placeholder="password" />
-        <Button>Sign In</Button>
+        <Input
+          type="text"
+          placeholder="Username"
+          onChange={(e) => setName(e.target.value)}
+        />
+        <Input
+          type="password"
+          placeholder="password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button onClick={handleLogin}>Sign In</Button>
 
         <Title>or</Title>
         <Input type="text" placeholder="Username" />
@@ -20,9 +41,9 @@ const SignIn = () => {
       <More>
         English(US)
         <Links>
-            <Link>Help</Link>
-            <Link>Privacy</Link>
-            <Link>Terms</Link>
+          <Link>Help</Link>
+          <Link>Privacy</Link>
+          <Link>Terms</Link>
         </Links>
       </More>
     </Container>
@@ -53,7 +74,7 @@ const Wrapper = styled.div`
 
 const Title = styled.h1`
   color: ${({ theme }) => theme.text};
-    font-size: 16px;
+  font-size: 16px;
 `;
 const SubTitle = styled.h2`
   color: ${({ theme }) => theme.text};
@@ -63,32 +84,32 @@ const Input = styled.input`
   background-color: transparent;
   outline: none;
   border: none;
-  border: 1px solid ${({ theme }) => theme.soft};   
+  border: 1px solid ${({ theme }) => theme.soft};
   border-radius: 3px;
   padding: 10px;
   color: ${({ theme }) => theme.text};
 `;
 const Button = styled.button`
-    border: none;
-    border-radius: 3px;
-    padding: 10px 20px;
-    color: ${({ theme }) => theme.textSoft};
-    background-color: ${({ theme }) => theme.soft};
-    cursor: pointer;
+  border: none;
+  border-radius: 3px;
+  padding: 10px 20px;
+  color: ${({ theme }) => theme.textSoft};
+  background-color: ${({ theme }) => theme.soft};
+  cursor: pointer;
 `;
 
 const More = styled.div`
-    display: flex;
-    justify-content: space-between;
-    width: 22vw;
-    margin-top: 5px;
-    color: ${({ theme }) => theme.textSoft};
-    padding: 0px 5px;
+  display: flex;
+  justify-content: space-between;
+  width: 22vw;
+  margin-top: 5px;
+  color: ${({ theme }) => theme.textSoft};
+  padding: 0px 5px;
 `;
 const Links = styled.p`
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 `;
 const Link = styled.p`
-    cursor: pointer;
+  cursor: pointer;
 `;
