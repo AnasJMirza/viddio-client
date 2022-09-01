@@ -2,27 +2,49 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "../axios.js";
 import { useDispatch } from "react-redux";
-import { loginFail, loginStart, loginSuccess } from "../redux/features/userSlice.js";
+import {
+  loginFail,
+  loginStart,
+  loginSuccess,
+} from "../redux/features/userSlice.js";
+
+import { auth, provider } from '../firebase.js';
+import { signInWithPopup } from 'firebase/auth';
 
 const SignIn = () => {
-
   const dispatch = useDispatch();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     try {
       dispatch(loginStart());
       const res = await axios.post("/auth/signin", { name, password });
-      dispatch(loginSuccess(res.data))
+      dispatch(loginSuccess(res.data));
       console.log("res", res.data);
     } catch (error) {
-      dispatch(loginFail())
+      dispatch(loginFail());
       console.log(error);
     }
   };
+
+  const signinWithGoogle = async () => {
+    try {
+      dispatch(loginStart())
+      const res = await signInWithPopup(auth, provider);
+      await axios.post('/auth/google', {
+        name: res.user.displayName,
+        email: res.user.email,
+        img: res.user.photoURL
+      });
+      dispatch(loginSuccess(res.data))
+    } catch (error) {
+      dispatch(loginFail())
+    }
+  }
 
   return (
     <Container>
@@ -42,9 +64,23 @@ const SignIn = () => {
         <Button onClick={handleLogin}>Sign In</Button>
 
         <Title>or</Title>
-        <Input type="text" placeholder="Username" onChange={(e) => setName(e.target.value) }/>
-        <Input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
-        <Input type="password" placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
+        <Button onClick={signinWithGoogle}>Signin with google</Button>
+        <Title>or</Title>
+        <Input
+          type="text"
+          placeholder="Username"
+          onChange={(e) => setName(e.target.value)}
+        />
+        <Input
+          type="email"
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input
+          type="password"
+          placeholder="password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <Button>Sign up</Button>
       </Wrapper>
       <More>
@@ -74,8 +110,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  height: 65vh;
-  width: 22vw;
+  height: 75vh;
+  width: 28vw;
   background-color: ${({ theme }) => theme.menuBg};
   padding: 30px 50px;
   border-radius: 3px;
