@@ -1,16 +1,25 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "../axios.js";
+import { useDispatch } from "react-redux";
+import { loginFail, loginStart, loginSuccess } from "../redux/features/userSlice.js";
 
 const SignIn = () => {
+
+  const dispatch = useDispatch();
+
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
     try {
+      dispatch(loginStart());
       const res = await axios.post("/auth/signin", { name, password });
+      dispatch(loginSuccess(res.data))
       console.log("res", res.data);
     } catch (error) {
+      dispatch(loginFail())
       console.log(error);
     }
   };
@@ -33,9 +42,9 @@ const SignIn = () => {
         <Button onClick={handleLogin}>Sign In</Button>
 
         <Title>or</Title>
-        <Input type="text" placeholder="Username" />
-        <Input type="email" placeholder="Email" />
-        <Input type="password" placeholder="password" />
+        <Input type="text" placeholder="Username" onChange={(e) => setName(e.target.value) }/>
+        <Input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
+        <Input type="password" placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
         <Button>Sign up</Button>
       </Wrapper>
       <More>
