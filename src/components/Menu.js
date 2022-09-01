@@ -21,8 +21,11 @@ import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 import HelpCenterOutlinedIcon from "@mui/icons-material/HelpCenterOutlined";
 import SettingsBrightnessOutlinedIcon from "@mui/icons-material/SettingsBrightnessOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import { useSelector } from "react-redux";
 
 const Menu = (props) => {
+  const { currentUser } = useSelector((state) => state.user);
+
   return (
     <Container>
       <Wrapper>
@@ -37,17 +40,23 @@ const Menu = (props) => {
           <HomeIcon />
           Home
         </Item>
-        <Link to="trending" style={{ textDecoration: "none", color: "inherit" }}>
-        <Item>
-          <ExploreOutlinedIcon />
-          Explore
-        </Item>
+        <Link
+          to="trending"
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <Item>
+            <ExploreOutlinedIcon />
+            Explore
+          </Item>
         </Link>
-        <Link to="subscription" style={{ textDecoration: "none", color: "inherit" }}>
-        <Item>
-          <SubscriptionsOutlinedIcon />
-          Subscription
-        </Item>
+        <Link
+          to="subscription"
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <Item>
+            <SubscriptionsOutlinedIcon />
+            Subscription
+          </Item>
         </Link>
         <Hr />
         <Item>
@@ -59,16 +68,20 @@ const Menu = (props) => {
           history
         </Item>
         <Hr />
-        <Login>
-          Sign in to like videos, comment and subscribe
-          <Link to="signin" style={{ textDecoration: "none" }}>
-            <Button>
-              <AccountCircleOutlinedIcon />
-              SIGN IN
-            </Button>
-          </Link>
-        </Login>
-        <Hr />
+        {!currentUser && (
+          <>
+            <Login>
+              Sign in to like videos, comment and subscribe
+              <Link to="signin" style={{ textDecoration: "none" }}>
+                <Button>
+                  <AccountCircleOutlinedIcon />
+                  SIGN IN
+                </Button>
+              </Link>
+            </Login>
+            <Hr />
+          </>
+        )}
         <Item>
           <LibraryMusicOutlinedIcon />
           Music

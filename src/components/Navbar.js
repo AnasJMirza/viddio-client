@@ -21,7 +21,7 @@ const Navbar = () => {
           <User>
             <VideoCallOutlinedIcon fontSize="large" style={{cursor: "pointer"}} />
             <Avatar src="https://avatars.githubusercontent.com/u/90819686?v=4"/>
-            <UserName>Anas</UserName>
+            <UserName>{currentUser.name}</UserName>
           </User>
         ) : (
           <Link to="signin" style={{ textDecoration: "none" }}>
