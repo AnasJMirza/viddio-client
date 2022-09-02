@@ -36,10 +36,11 @@ const SignIn = () => {
       dispatch(loginStart())
       const result = await signInWithPopup(auth, provider);
       const res = await axios.post('/auth/google', {
-        name: res.user.displayName,
-        email: res.user.email,
-        img: res.user.photoURL
+        name: result.user.displayName,
+        email: result.user.email,
+        img: result.user.photoURL
       });
+      
       dispatch(loginSuccess(res.data))
     } catch (error) {
       dispatch(loginFail())

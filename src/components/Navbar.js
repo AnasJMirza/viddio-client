@@ -20,7 +20,7 @@ const Navbar = () => {
         {currentUser ? (
           <User>
             <VideoCallOutlinedIcon fontSize="large" style={{cursor: "pointer"}} />
-            <Avatar src="https://avatars.githubusercontent.com/u/90819686?v=4"/>
+            <Avatar src={currentUser.img}/>
             <UserName>{currentUser.name}</UserName>
           </User>
         ) : (
