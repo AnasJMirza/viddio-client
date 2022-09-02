@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import axios from "../axios.js";
 
 // icons imports
 import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
@@ -8,8 +9,41 @@ import ReplyOutlinedIcon from "@mui/icons-material/ReplyOutlined";
 import AddTaskOutlinedIcon from "@mui/icons-material/AddTaskOutlined";
 import Comments from "../components/Comments";
 import Card from "../components/Card";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { format } from "timeago.js";
+import {
+  fetchFail,
+  fetchStart,
+  fetchSuccess,
+} from "../redux/features/videoSlice.js";
 
 const Video = () => {
+  const  {currentUser} = useSelector((state) => state.user);
+  const {currentVideo} = useSelector((state) => state.video);
+  
+  const dispatch = useDispatch();
+  const path = useLocation().pathname.split("/")[2];
+
+  const [channel, setChannel] = useState({});
+
+  useEffect(() => {
+    const fetchVideos = async () => {
+      try {
+        const videosRes = await axios.get(`/video/find/${path}`);
+        const channelRes = await axios.get(
+          `/user/find/${videosRes.data.userId}`
+        );
+        setChannel(channelRes.data);
+        
+        dispatch(fetchSuccess(videosRes.data));
+      } catch (error) {
+        
+      }
+    };
+    fetchVideos();
+  }, [path, dispatch]);
+
   return (
     <Container>
       <Content>
@@ -24,15 +58,15 @@ const Video = () => {
             allowfullscreen
           ></iframe>
         </VideoWrapper>
-        <Title>Toyota Mark X 300G Premium | Owner Review | PakWheels</Title>
+        <Title>{currentVideo.title}</Title>
         <Details>
-          <Info>100,000 views ● 1 day ago</Info>
+          <Info>{currentVideo.views} views ● {format(currentVideo.createdAt)}</Info>
           <Buttons>
             <Button>
-              <ThumbUpAltOutlinedIcon /> 123
+              <ThumbUpAltOutlinedIcon /> {currentVideo.likes.length}
             </Button>
             <Button>
-              <ThumbDownAltOutlinedIcon /> Dislike
+              <ThumbDownAltOutlinedIcon /> {currentVideo.dislikes.length}
             </Button>
             <Button>
               <ReplyOutlinedIcon /> Share
@@ -46,11 +80,13 @@ const Video = () => {
 
         <Channel>
           <ChannelDetails>
-            <ProfilePic src="https://avatars.githubusercontent.com/u/90819686?v=4" />
+            <ProfilePic src={currentUser.img} />
             <ChannelInfo>
-                <ChannelName>AnasJMirza</ChannelName>
-                <SubscribeCount>365K Subscribers</SubscribeCount>
-                <VideoDescription>Great fuel average with some amazing power pack features! Don't miss this owner's review of The Toyota Mark X. What did you like the most about the car? Let us know in the comments below.</VideoDescription>
+              <ChannelName>{currentUser.name}</ChannelName>
+              <SubscribeCount>{currentUser.subscribers} subscribers</SubscribeCount>
+              <VideoDescription>
+                {currentVideo.description}
+              </VideoDescription>
             </ChannelInfo>
           </ChannelDetails>
           <Subscribe>Subscribe</Subscribe>
@@ -58,7 +94,7 @@ const Video = () => {
         <Hr />
         <Comments />
       </Content>
-      <Recommendation>
+      {/* <Recommendation>
         <Card type="small" />
         <Card type="small" />
         <Card type="small" />
@@ -78,7 +114,7 @@ const Video = () => {
         <Card type="small" />
         <Card type="small" />
         <Card type="small" />
-      </Recommendation>
+      </Recommendation> */}
     </Container>
   );
 };
@@ -143,42 +179,35 @@ const ProfilePic = styled.img`
   border-radius: 50%;
 `;
 const ChannelDetails = styled.div`
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
 `;
 
-const ChannelInfo = styled.div`
-    
-`;
-
+const ChannelInfo = styled.div``;
 
 const ChannelName = styled.h1`
-    margin-bottom: 4px;
-    font-size: 14px;
-    font-weight: 600;
-    color: ${({theme}) => theme.text};
-
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: ${({ theme }) => theme.text};
 `;
 const SubscribeCount = styled.p`
-    color: ${({theme}) => theme.textSoft};
-    font-size: 11px;
-
+  color: ${({ theme }) => theme.textSoft};
+  font-size: 11px;
 `;
 
 const VideoDescription = styled.p`
-    color: ${({theme}) => theme.text};
-    font-size: 12px;
-    margin-top: 8px;
-    font-weight: 400;
-
+  color: ${({ theme }) => theme.text};
+  font-size: 12px;
+  margin-top: 8px;
+  font-weight: 400;
 `;
 const Subscribe = styled.p`
-    background-color: #cc1a00;
-    color: white;
-    font-weight: 500;
-    border-radius: 3px;
-    cursor: pointer;
-    padding: 10px 20px;
-
+  background-color: #cc1a00;
+  color: white;
+  font-weight: 500;
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 10px 20px;
 `;
