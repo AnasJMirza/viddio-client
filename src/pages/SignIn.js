@@ -34,8 +34,8 @@ const SignIn = () => {
   const signinWithGoogle = async () => {
     try {
       dispatch(loginStart())
-      const res = await signInWithPopup(auth, provider);
-      await axios.post('/auth/google', {
+      const result = await signInWithPopup(auth, provider);
+      const res = await axios.post('/auth/google', {
         name: res.user.displayName,
         email: res.user.email,
         img: res.user.photoURL
