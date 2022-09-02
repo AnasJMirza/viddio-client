@@ -6,16 +6,18 @@ import axios from "../axios.js";
 import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
 import ReplyOutlinedIcon from "@mui/icons-material/ReplyOutlined";
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import AddTaskOutlinedIcon from "@mui/icons-material/AddTaskOutlined";
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import Comments from "../components/Comments";
 import Card from "../components/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { format } from "timeago.js";
 import {
-  fetchFail,
-  fetchStart,
+  dislike,
   fetchSuccess,
+  like,
 } from "../redux/features/videoSlice.js";
 
 const Video = () => {
@@ -44,6 +46,18 @@ const Video = () => {
     fetchVideos();
   }, [path, dispatch]);
 
+
+  const handleLike = async () => {
+    await axios.put(`/user/like/${currentVideo._id}`);
+    // dispatch(like(currentUser._id));
+    
+  }
+
+  const handleDisike = async () => {
+    await axios.put(`/user/dislike/${currentVideo._id}`);
+    // dispatch(dislike(currentUser._id));
+  }
+
   return (
     <Container>
       <Content>
@@ -62,11 +76,11 @@ const Video = () => {
         <Details>
           <Info>{currentVideo.views} views ● {format(currentVideo.createdAt)}</Info>
           <Buttons>
-            <Button>
-              <ThumbUpAltOutlinedIcon /> {currentVideo.likes.length}
+            <Button onClick={handleLike}>
+              {currentVideo.likes?.includes(currentUser._id) ? <ThumbUpIcon />  : <ThumbUpAltOutlinedIcon />} {currentVideo.likes.length}
             </Button>
-            <Button>
-              <ThumbDownAltOutlinedIcon /> {currentVideo.dislikes.length}
+            <Button onClick={handleDisike}>
+              {currentVideo.dislikes?.includes(currentUser._id) ? <ThumbDownIcon /> : <ThumbDownAltOutlinedIcon />} {currentVideo.dislikes.length}
             </Button>
             <Button>
               <ReplyOutlinedIcon /> Share

@@ -21,10 +21,16 @@ import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 import HelpCenterOutlinedIcon from "@mui/icons-material/HelpCenterOutlined";
 import SettingsBrightnessOutlinedIcon from "@mui/icons-material/SettingsBrightnessOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../redux/features/userSlice";
 
 const Menu = (props) => {
   const { currentUser } = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logout())
+  }
 
   return (
     <Container>
@@ -68,7 +74,19 @@ const Menu = (props) => {
           history
         </Item>
         <Hr />
-        {!currentUser && (
+        {currentUser ? (
+          <>
+            
+              <Link to="signin" style={{ textDecoration: "none" }} >
+                <Button onClick={handleLogout}>
+                  <AccountCircleOutlinedIcon />
+                  Logout
+                </Button>
+              </Link>
+            
+            <Hr />
+          </>
+        ) : (
           <>
             <Login>
               Sign in to like videos, comment and subscribe
