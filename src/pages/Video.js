@@ -21,8 +21,8 @@ import {
 } from "../redux/features/videoSlice.js";
 
 const Video = () => {
-  const  {currentUser} = useSelector((state) => state.user);
-  const {currentVideo} = useSelector((state) => state.video);
+  const  { currentUser } = useSelector((state) => state.user);
+  const { currentVideo } = useSelector((state) => state.video);
   
   const dispatch = useDispatch();
   const path = useLocation().pathname.split("/")[2];
@@ -37,7 +37,8 @@ const Video = () => {
           `/user/find/${videosRes.data.userId}`
         );
         setChannel(channelRes.data);
-        
+        console.log("1", currentVideo);
+        console.log("", currentUser);
         dispatch(fetchSuccess(videosRes.data));
       } catch (error) {
         
@@ -49,13 +50,13 @@ const Video = () => {
 
   const handleLike = async () => {
     await axios.put(`/user/like/${currentVideo._id}`);
-    // dispatch(like(currentUser._id));
+    dispatch(like(currentUser._id));
     
   }
 
   const handleDisike = async () => {
     await axios.put(`/user/dislike/${currentVideo._id}`);
-    // dispatch(dislike(currentUser._id));
+    dispatch(dislike(currentUser._id));
   }
 
   return (
