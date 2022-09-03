@@ -1,16 +1,22 @@
-import React from 'react';
-import styled from 'styled-components';
 
-const Comment = () => {
+import React from 'react';
+import { useSelector } from 'react-redux';
+import styled from 'styled-components';
+import { format } from 'timeago.js';
+
+const Comment = ({comment}) => {
+
+    const { currentUser } = useSelector(state => state.user);
+
     return (
         <Container>
-            <Avatar src="https://avatars.githubusercontent.com/u/90819686?v=4" />
+            <Avatar src={currentUser.img} />
             <Details>
                 <Info>
-                    <Name>AnasJMirza</Name>
-                    <Date>1 day ago</Date>
+                    <Name>{currentUser.name}</Name>
+                    <Date>{format(comment.createdAt)}</Date>
                 </Info>
-                <Description>Awesome car loaded with ton of features .. meanwhile Rear suspension height doesn’t looks stock. That  increase in rear height of car has to some extent ruined the beauty of this beast.</Description>
+                <Description>{comment.description}</Description>
             </Details>
         </Container>
     );

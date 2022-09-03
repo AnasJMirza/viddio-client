@@ -68,15 +68,7 @@ const Video = () => {
     <Container>
       <Content>
         <VideoWrapper>
-          <iframe
-            width="100%"
-            height="410"
-            src="https://www.youtube.com/embed/lreNAOcjtCE"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
+          <VideoFrame src={currentVideo.videoUrl} />
         </VideoWrapper>
         <Title>{currentVideo.title}</Title>
         <Details>
@@ -128,7 +120,7 @@ const Video = () => {
           </Subscribe>
         </Channel>
         <Hr />
-        <Comments />
+        <Comments videoId={currentVideo._id}/>
       </Content>
       {/* <Recommendation>
         <Card type="small" />
@@ -246,4 +238,10 @@ const Subscribe = styled.p`
   border-radius: 3px;
   cursor: pointer;
   padding: 10px 20px;
+`;
+
+const VideoFrame = styled.video`
+  max-height: 720px;
+  width: 100%;
+  object-fit: cover;
 `;
