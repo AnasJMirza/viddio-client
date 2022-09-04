@@ -20,6 +20,7 @@ import { subscrription } from "../redux/features/userSlice.js";
 const Video = () => {
   const { currentUser } = useSelector((state) => state.user);
   const { currentVideo } = useSelector((state) => state.video);
+  
 
   const dispatch = useDispatch();
   const path = useLocation().pathname.split("/")[2];
@@ -66,7 +67,7 @@ const Video = () => {
     <Container>
       <Content>
         <VideoWrapper>
-          <VideoFrame src={currentVideo.videoUrl} />
+          <VideoFrame src={currentVideo.videoUrl} controls muted autoPlay/>
         </VideoWrapper>
         <Title>{currentVideo.title}</Title>
         <Details>
@@ -88,7 +89,7 @@ const Video = () => {
               ) : (
                 <ThumbDownAltOutlinedIcon />
               )}{" "}
-              {currentVideo.dislikes.length}
+              Dislike
             </Button>
             <Button>
               <ReplyOutlinedIcon /> Share

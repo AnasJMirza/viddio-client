@@ -2,8 +2,13 @@ import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import { storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import axios from '../axios.js'
+import { useNavigate } from "react-router-dom";
 
 const Upload = ({ setOpen }) => {
+
+    const navigate = useNavigate();
+
   const [img, setImg] = useState(undefined);
   const [video, setVideo] = useState(undefined);
 
@@ -15,7 +20,7 @@ const Upload = ({ setOpen }) => {
 
   const handleChange = (e) => {
     setInput((prev) => {
-      return { ...prev, [e.target.name]: [e.target.value] };
+      return { ...prev, [e.target.name]: e.target.value };
     });
   };
 
@@ -68,6 +73,21 @@ const Upload = ({ setOpen }) => {
     img && uploadFiles(img, 'imgUrl');
   }, [img]);
 
+  const handleUpload = async (e) => {
+    e.preventDefault();
+    try {
+        console.log(input);
+        console.log(tags);
+        const res = await axios.post('/video', {...input, tags});
+        console.log(res.data);
+        // setOpen(false)
+        // navigate(`/video/${res.data._id}`)
+        
+    } catch (error) {
+        
+    }
+  }
+
   return (
     <Container>
       <Wrapper>
@@ -106,7 +126,7 @@ const Upload = ({ setOpen }) => {
             onChange={(e) => setImg(e.target.files[0])}
           />
         )}
-        <Button>Upload</Button>
+        <Button onClick={handleUpload}>Upload</Button>
       </Wrapper>
     </Container>
   );
