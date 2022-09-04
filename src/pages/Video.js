@@ -16,6 +16,7 @@ import { useLocation } from "react-router-dom";
 import { format } from "timeago.js";
 import { dislike, fetchSuccess, like } from "../redux/features/videoSlice.js";
 import { subscrription } from "../redux/features/userSlice.js";
+import Recommend from "../components/Recommend.js";
 
 const Video = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -121,27 +122,9 @@ const Video = () => {
         <Hr />
         <Comments videoId={currentVideo._id}/>
       </Content>
-      {/* <Recommendation>
-        <Card type="small" />
-        <Card type="small" />
-        <Card type="small" />
-        <Card type="small" />
-        <Card type="small" />
-        <Card type="small" />
-        <Card type="small" />
-        <Card type="small" />
-        <Card type="small" />
-        <Card type="small" />
-        <Card type="small" />
-        <Card type="small" />
-        <Card type="small" />
-        <Card type="small" />
-        <Card type="small" />
-        <Card type="small" />
-        <Card type="small" />
-        <Card type="small" />
-        <Card type="small" />
-      </Recommendation> */}
+
+      <Recommend tags={currentVideo.tags} />
+      
     </Container>
   );
 };
@@ -156,9 +139,7 @@ const Container = styled.div`
 const Content = styled.div`
   flex: 4.5;
 `;
-const Recommendation = styled.div`
-  flex: 2;
-`;
+
 
 const VideoWrapper = styled.div`
   width: 100%;

@@ -80,8 +80,8 @@ const Upload = ({ setOpen }) => {
         console.log(tags);
         const res = await axios.post('/video', {...input, tags});
         console.log(res.data);
-        // setOpen(false)
-        // navigate(`/video/${res.data._id}`)
+        setOpen(false)
+        navigate(`/video/${res.data._id}`)
         
     } catch (error) {
         
