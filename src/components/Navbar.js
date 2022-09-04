@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
@@ -9,15 +9,19 @@ import { useSelector } from "react-redux";
 import Upload from "./Upload";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
+
+  const [q, setQ] = useState("");
+
   return (
     <>
     <Container>
       <Wrapper>
         <Search>
-          <Input placeholder="Search" />
-          <SearchOutlinedIcon />
+          <Input placeholder="Search"  onChange={(e)=> setQ(e.target.value)}/>
+          <SearchOutlinedIcon  style={{cursor: "pointer"}} onClick={()=>navigate(`/search?q=${q}`)}/>
         </Search>
         {currentUser ? (
           <User>
@@ -71,6 +75,7 @@ const Search = styled.div`
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 3px;
+  color: ${({ theme }) => theme.text};
 `;
 
 const Input = styled.input`

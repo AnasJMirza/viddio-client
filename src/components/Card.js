@@ -41,16 +41,17 @@ const Card = (props) => {
 export default Card;
 
 const Container = styled.div`
-  width: ${(props) => props.type !== "small" && "320px"};
+  width: ${(props) => props.type !== "small" && "330px"};
   margin-bottom: ${(props) => (props.type !== "small" ? "45px" : "10px")};
   cursor: pointer;
   display: ${(props) => props.type === "small" && "flex"};
   gap: ${(props) => props.type === "small" && "10px"};
+  
 `;
 
 const Image = styled.img`
   width: 100%;
-  height: ${(props) => props.type === "small" && "100px"};
+  max-height: ${(props) => props.type === "small" ? "100px" : "200px"};
   background-color: #999;
   flex: 1;
   background-color: gray;
