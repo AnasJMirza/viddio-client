@@ -21,8 +21,8 @@ const Navbar = () => {
         </Search>
         {currentUser ? (
           <User>
-            <VideoCallOutlinedIcon fontSize="large" style={{cursor: "pointer"}} onClick={()=>setOpen(true)} />
-            <Avatar src={currentUser.img}/>
+            <VideoCallOutlinedIcon fontSize="large" style={{cursor: "pointer"}} onClick={ () => setOpen(true) } />
+            <Avatar src={currentUser?.img}/>
             <UserName>{currentUser.name}</UserName>
           </User>
         ) : (
