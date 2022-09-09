@@ -38,7 +38,7 @@ const Menu = (props) => {
         <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
           <Logo>
             <Img src={youtube} />
-            YouTube
+            AnasTube
           </Logo>
         </Link>
 

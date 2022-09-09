@@ -55,8 +55,8 @@ const Video = () => {
   const handleSubscription = async () => {
     try {
       currentUser.subscribedUsers.includes(Channel._id)
-        ? axios.put(`/user/unsub/${channel._id}`)
-        : axios.put(`/user/sub/${channel._id}`);
+        ? await axios.put(`/user/unsub/${channel._id}`)
+        : await axios.put(`/user/sub/${channel._id}`);
 
       dispatch(subscrription(channel._id));
     } catch (error) {
@@ -104,11 +104,11 @@ const Video = () => {
 
         <Channel>
           <ChannelDetails>
-            <ProfilePic src={currentUser.img} />
+            <ProfilePic src={channel.img} />
             <ChannelInfo>
-              <ChannelName>{currentUser.name}</ChannelName>
+              <ChannelName>{channel.name}</ChannelName>
               <SubscribeCount>
-                {currentUser.subscribers} subscribers
+                {channel.subscribers} subscribers
               </SubscribeCount>
               <VideoDescription>{currentVideo.description}</VideoDescription>
             </ChannelInfo>

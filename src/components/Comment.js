@@ -1,5 +1,6 @@
 
-import React from 'react';
+import axios from '../axios.js';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { format } from 'timeago.js';
@@ -8,12 +9,29 @@ const Comment = ({comment}) => {
 
     const { currentUser } = useSelector(state => state.user);
 
+    const [commentUser, setCommentUser] = useState({})
+
+    
+    useEffect(()=>{
+        const getUser = async () => {
+            try {
+                
+            const res = await axios.get(`/user/find/${comment.userId}`)
+            setCommentUser(res.data);
+            
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getUser();
+    }, [])
+
     return (
         <Container>
-            <Avatar src={currentUser.img} />
+            <Avatar src={commentUser.img} />
             <Details>
                 <Info>
-                    <Name>{currentUser.name}</Name>
+                    <Name>{commentUser.name}</Name>
                     <Date>{format(comment.createdAt)}</Date>
                 </Info>
                 <Description>{comment.description}</Description>
