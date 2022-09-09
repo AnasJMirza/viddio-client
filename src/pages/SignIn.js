@@ -10,9 +10,12 @@ import {
 
 import { auth, provider } from '../firebase.js';
 import { signInWithPopup } from 'firebase/auth';
+import { useNavigate } from "react-router-dom";
+
 
 const SignIn = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -24,12 +27,27 @@ const SignIn = () => {
       dispatch(loginStart());
       const res = await axios.post("/auth/signin", { name, password });
       dispatch(loginSuccess(res.data));
-      console.log("res", res.data);
+      navigate('/')
     } catch (error) {
       dispatch(loginFail());
       console.log(error);
     }
   };
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("/auth/signup", { name, email,  password });
+      if(res.status == 200){
+        alert("Account Created Successfully");
+      }else{
+        alert("There is something wrong...");
+      }
+      
+    } catch (error) {
+      
+    }
+  }
 
   const signinWithGoogle = async () => {
     try {
@@ -42,6 +60,7 @@ const SignIn = () => {
       });
       
       dispatch(loginSuccess(res.data))
+      navigate('/')
     } catch (error) {
       dispatch(loginFail())
     }
@@ -82,7 +101,7 @@ const SignIn = () => {
           placeholder="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button>Sign up</Button>
+        <Button onClick={handleSignup}>Sign up</Button>
       </Wrapper>
       <More>
         English(US)

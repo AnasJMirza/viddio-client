@@ -25,7 +25,7 @@ const Card = (props) => {
         <Details type={props.type}>
           <ChannelImage
             type={props.type}
-            src={channel.imgUrl}
+            src={channel.img}
           />
           <Text>
             <Title type={props.type}>{props.video.title}</Title>

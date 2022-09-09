@@ -81,7 +81,7 @@ const Video = () => {
                 <ThumbUpIcon />
               ) : (
                 <ThumbUpAltOutlinedIcon />
-              )}{" "}
+              )}
               {currentVideo.likes.length}
             </Button>
             <Button onClick={handleDisike}>
@@ -89,7 +89,7 @@ const Video = () => {
                 <ThumbDownIcon />
               ) : (
                 <ThumbDownAltOutlinedIcon />
-              )}{" "}
+              )}
               Dislike
             </Button>
             <Button>
