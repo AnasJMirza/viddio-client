@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: "http://localhost:5000/api/",
+    baseURL: "https://you-tube-server.herokuapp.com/api/",
     withCredentials: true,
     headers: {
         "Content-type": "application/json",

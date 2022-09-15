@@ -69,26 +69,26 @@ const Video = () => {
     <Container>
       <Content>
         <VideoWrapper>
-          <VideoFrame src={currentVideo.videoUrl} controls muted autoPlay/>
+          <VideoFrame src={currentVideo?.videoUrl} controls muted autoPlay/>
         </VideoWrapper>
-        <Title>{currentVideo.title}</Title>
+        <Title>{currentVideo?.title}</Title>
         <Details>
           <Info>
-            {currentVideo.views} views ● {format(currentVideo.createdAt)}
+            {currentVideo?.views} views ● {format(currentVideo?.createdAt)}
           </Info>
           <Buttons>
             <Button onClick={currentUser ? handleLike : ()=> {alert("You need to login to like any video")}}>
-              {currentVideo.likes?.includes(currentUser?._id) ? (
+              {currentVideo?.likes?.includes(currentUser?._id) ? (
                 <ThumbUpIcon />
               ) : (
                 <ThumbUpAltOutlinedIcon />
               )}
-              {currentVideo.likes.length}
+              {currentVideo?.likes?.length}
             </Button>
             <Button onClick={currentUser ? handleDisike : ()=>{alert("You need to login to dislike any video")}}>
-              {currentVideo.dislikes?.includes(currentUser?._id) ? (
+              {currentVideo?.dislikes?.includes(currentUser?._id) ? (
                 <ThumbDownIcon />
-              ) : (
+              ) : ( 
                 <ThumbDownAltOutlinedIcon />
               )}
               Dislike
@@ -226,3 +226,5 @@ const VideoFrame = styled.video`
   width: 100%;
   object-fit: cover;
 `;
+
+// sadjkl
