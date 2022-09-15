@@ -17,6 +17,7 @@ import { format } from "timeago.js";
 import { dislike, fetchSuccess, like } from "../redux/features/videoSlice.js";
 import { subscrription } from "../redux/features/userSlice.js";
 import Recommend from "../components/Recommend.js";
+import LoginMsg from "../components/LoginMsg.js";
 
 const Video = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -43,18 +44,18 @@ const Video = () => {
   }, [path, dispatch]);
 
   const handleLike = async () => {
-    await axios.put(`/user/like/${currentVideo._id}`);
-    dispatch(like(currentUser._id));
+    currentUser && await axios.put(`/user/like/${currentVideo._id}`);
+    dispatch(like(currentUser?._id));
   };
 
   const handleDisike = async () => {
     await axios.put(`/user/dislike/${currentVideo._id}`);
-    dispatch(dislike(currentUser._id));
+    dispatch(dislike(currentUser?._id));
   };
 
   const handleSubscription = async () => {
     try {
-      currentUser.subscribedUsers.includes(Channel._id)
+      currentUser?.subscribedUsers.includes(Channel._id)
         ? await axios.put(`/user/unsub/${channel._id}`)
         : await axios.put(`/user/sub/${channel._id}`);
 
@@ -76,16 +77,16 @@ const Video = () => {
             {currentVideo.views} views ● {format(currentVideo.createdAt)}
           </Info>
           <Buttons>
-            <Button onClick={handleLike}>
-              {currentVideo.likes?.includes(currentUser._id) ? (
+            <Button onClick={currentUser ? handleLike : ()=> {alert("You need to login to like any video")}}>
+              {currentVideo.likes?.includes(currentUser?._id) ? (
                 <ThumbUpIcon />
               ) : (
                 <ThumbUpAltOutlinedIcon />
               )}
               {currentVideo.likes.length}
             </Button>
-            <Button onClick={handleDisike}>
-              {currentVideo.dislikes?.includes(currentUser._id) ? (
+            <Button onClick={currentUser ? handleDisike : ()=>{alert("You need to login to dislike any video")}}>
+              {currentVideo.dislikes?.includes(currentUser?._id) ? (
                 <ThumbDownIcon />
               ) : (
                 <ThumbDownAltOutlinedIcon />
@@ -113,14 +114,14 @@ const Video = () => {
               <VideoDescription>{currentVideo.description}</VideoDescription>
             </ChannelInfo>
           </ChannelDetails>
-          <Subscribe onClick={handleSubscription}>
-            {currentUser.subscribedUsers.includes(channel._id)
+          <Subscribe onClick={currentUser ?  handleSubscription : ()=>{alert("You need to login to subscribe a channel")}}>
+            {currentUser?.subscribedUsers.includes(channel._id)
               ? "Unsubscribe"
               : "Subscribe"}
           </Subscribe>
         </Channel>
         <Hr />
-        <Comments videoId={currentVideo._id}/>
+        {currentUser ? (<Comments videoId={currentVideo._id}/>) : <LoginMsg />}
       </Content>
 
       <Recommend tags={currentVideo.tags} />

@@ -27,7 +27,7 @@ const Navbar = () => {
           <User>
             <VideoCallOutlinedIcon fontSize="large" style={{cursor: "pointer"}} onClick={ () => setOpen(true) } />
             <Avatar src={currentUser?.img}/>
-            <UserName>{currentUser.name}</UserName>
+            <UserName>{currentUser?.name}</UserName>
           </User>
         ) : (
           <Link to="signin" style={{ textDecoration: "none" }}>

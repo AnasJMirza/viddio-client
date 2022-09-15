@@ -55,15 +55,15 @@ const Menu = (props) => {
             Explore
           </Item>
         </Link>
-        <Link
+        {/* <Link
           to="subscription"
           style={{ textDecoration: "none", color: "inherit" }}
-        >
+        > */}
           <Item>
             <SubscriptionsOutlinedIcon />
             Subscription
           </Item>
-        </Link>
+        {/* </Link> */}
         <Hr />
         <Item>
           <VideoLibraryOutlinedIcon />

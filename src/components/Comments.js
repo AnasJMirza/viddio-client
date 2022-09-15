@@ -37,7 +37,7 @@ const Comments = ({videoId}) => {
   return (
     <Container>
       <NewComment>
-        <Avatar src={currentUser.img} />
+        <Avatar src={currentUser?.img} />
         <Input placeholder="Add a comment..." onChange={(e) => setCommentValue(e.target.value)}/> <Button onClick={handleComment}>Post Comment</Button>
       </NewComment>
       {
