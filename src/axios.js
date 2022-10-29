@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: "https://you-tube-server.herokuapp.com/api/",
+    baseURL: "https://whispering-anchorage-80204.herokuapp.com/api",
     withCredentials: true,
     headers: {
         "Content-type": "application/json",
@@ -9,3 +9,5 @@ const instance = axios.create({
 });
 
 export default instance;
+
+// https://you-tube-server.herokuapp.com/api/

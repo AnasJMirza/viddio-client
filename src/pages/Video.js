@@ -105,13 +105,13 @@ const Video = () => {
 
         <Channel>
           <ChannelDetails>
-            <ProfilePic src={channel.img} />
+            <ProfilePic src={channel?.img} />
             <ChannelInfo>
-              <ChannelName>{channel.name}</ChannelName>
+              <ChannelName>{channel?.name}</ChannelName>
               <SubscribeCount>
-                {channel.subscribers} subscribers
+                {channel?.subscribers} subscribers
               </SubscribeCount>
-              <VideoDescription>{currentVideo.description}</VideoDescription>
+              <VideoDescription>{currentVideo?.description}</VideoDescription>
             </ChannelInfo>
           </ChannelDetails>
           <Subscribe onClick={currentUser ?  handleSubscription : ()=>{alert("You need to login to subscribe a channel")}}>
@@ -121,10 +121,10 @@ const Video = () => {
           </Subscribe>
         </Channel>
         <Hr />
-        {currentUser ? (<Comments videoId={currentVideo._id}/>) : <LoginMsg />}
+        {currentUser ? (<Comments videoId={currentVideo?._id}/>) : <LoginMsg />}
       </Content>
 
-      <Recommend tags={currentVideo.tags} />
+      <Recommend tags={currentVideo?.tags} />
       
     </Container>
   );
