@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const Upload = ({ setOpen }) => {
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [img, setImg] = useState(undefined);
   const [video, setVideo] = useState(undefined);
