@@ -26,17 +26,16 @@ const Home = ({ type }) => {
   return (
     <Container>
       {loading ? (
-        // <Puff
-        //   height="80"
-        //   width="80"
-        //   radius={1}
-        //   color="#4fa94d"
-        //   ariaLabel="puff-loading"
-        //   wrapperStyle={{}}
-        //   wrapperClass=""
-        //   visible={true}
-        // /> 
-        "loading....."
+        <Puff
+          height="80"
+          width="80"
+          radius={1}
+          color="#4fa94d"
+          ariaLabel="puff-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
       ) : (
         videos.map((video) => {
           return <Card key={video._id} video={video} />;
